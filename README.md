@@ -1,4 +1,4 @@
- 🎙️ Edge TTS Studio
+# 🎙️ Edge TTS Studio
 
 A lightweight, mobile-first web application that converts text into highly realistic, natural-sounding speech. Powered by Microsoft's Edge Text-to-Speech (TTS) neural voices and built with Python and Flask.
 
