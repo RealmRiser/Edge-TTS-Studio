@@ -1,0 +1,108 @@
+<!DOCTYPE html>                                      <html lang="en">
+<head>                                                   <meta charset="UTF-8">                               <meta name="viewport" content="width=device-width, initial-scale=1.0">                                    <title>Edge TTS Studio</title>                       <style>
+        :root { --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --primary: #3b82f6; }                            body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 15px; display: flex; justify-content: center; }
+        .container { background: var(--card); padding: 20px; border-radius: 12px; width: 100%; max-width: 500px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        h2 { text-align: center; margin-top: 0; }            label { font-size: 14px; margin-top: 15px; display: block; color: #94a3b8; }
+        textarea, select, input[type="text"] { width: 100%; padding: 10px; margin-top: 5px; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; box-sizing: border-box; font-size: 16px; }                                                         textarea { resize: vertical; height: 120px; }
+                                                             /* New Character Count Style */                      .char-count { text-align: right; font-size: 12px; color: #94a3b8; margin-top: 5px; margin-bottom: 10px; font-weight: bold; }                           
+        .row { display: flex; gap: 10px; }                   .row > div { flex: 1; }                              .file-upload { display: flex; align-items: center; gap: 10px; margin-top: 5px; font-size: 14px; }         button { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.2s; }         button:hover { background: #2563eb; }
+        button:disabled { background: #475569; cursor: not-allowed; }                                             #status { text-align: center; font-size: 14px; margin-top: 10px; color: #10b981; }                        .audio-container { margin-top: 20px; display: none; background: #0f172a; padding: 15px; border-radius: 8px; }
+        audio { width: 100%; margin-bottom: 10px; }          .download-btn { display: block; text-align: center; padding: 10px; background: #059669; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; }                                           </style>
+</head>
+<body>                                                   <div class="container">
+        <h2>🎙️ Edge TTS Studio</h2>
+
+        <label>Upload a .txt file (Optional)</label>
+        <input type="file" id="fileInput" accept=".txt" class="file-upload">
+                                                             <label for="text">Text to speak:</label>
+        <!-- Added oninput event to trigger the counter -->
+        <textarea id="text" placeholder="Paste or type your text here..." oninput="updateCharCount()"></textarea>
+
+        <!-- New Character Count Display -->                 <div id="charCount" class="char-count">0 characters</div>                                         
+        <label for="voiceSearch">Search Voices:</label>
+        <input type="text" id="voiceSearch" placeholder="e.g., en-US, Spanish, Jenny..." oninput="filterVoices()">
+
+        <label for="voice">Select Voice:</label>
+        <select id="voice" size="2">
+            <option value="en-US-JennyNeural">Loading voices...</option>
+        </select>
+
+        <div class="row">
+            <div>                                                    <label for="rate">Speed</label>
+                <select id="rate">                                       <option value="-50%">🐢 Very Slow</option>                                                                <option value="-20%">🚶 Slow</option>
+                    <option value="+0%" selected>🚶 Normal</option>
+                    <option value="+30%">🏃 Fast</option>
+                    <option value="+60%">⚡ Very Fast</option>                                                            </select>
+            </div>                                               <div>
+                <label for="pitch">Pitch (Tone)</label>
+                <select id="pitch">                                      <option value="-40Hz">📉 Very Deep</option>                                                               <option value="-20Hz">📉 Deep</option>
+                    <option value="+0Hz" selected>🎵 Normal</option>                                                          <option value="+20Hz">📈 High</option>                                                                    <option value="+40Hz">📈 Very High</option>
+                </select>
+            </div>                                           </div>
+                                                             <button id="generateBtn" onclick="generateAudio()">🎬 Generate Speech</button>
+        <div id="status"></div>
+                                                             <div class="audio-container" id="audioContainer">
+            <audio id="audioPlayer" controls></audio>            <a id="downloadLink" class="download-btn" download="speech.mp3">💾 Download MP3</a>                   </div>
+    </div>
+
+    <script>                                                 let allVoices = [];
+
+        // Function to calculate and display character count
+        function updateCharCount() {                             const text = document.getElementById('text').value;                                                       const count = text.length;
+            // Format with commas (e.g., 1,000) for better readability
+            document.getElementById('charCount').innerText = `${count.toLocaleString()} character${count === 1 ? '' : 's'}`;                                           }
+
+        window.onload = async () => {
+            try {                                                    const res = await fetch('/api/voices');                                                                   allVoices = await res.json();
+                renderVoices(allVoices);                         } catch (e) { console.error(e); }
+        };                                           
+        function renderVoices(voices) {                          const select = document.getElementById('voice');                                                          select.innerHTML = '';
+            voices.forEach(v => {
+                const opt = document.createElement('option');                                                             opt.value = v; opt.innerText = v;                    select.appendChild(opt);
+            });                                                  const defaultVoice = voices.find(v => v.includes('JennyNeural')) || voices[0];
+            if(defaultVoice) select.value = defaultVoice;
+        }                                            
+        function filterVoices() {                                const query = document.getElementById('voiceSearch').value.toLowerCase();
+            const filtered = allVoices.filter(v => v.toLowerCase().includes(query));                                  renderVoices(filtered);
+        }
+
+        document.getElementById('fileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];                      if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('text').value = e.target.result;
+                updateCharCount(); // Update count when file is uploaded
+            };
+            reader.readAsText(file);
+        });
+                                                             async function generateAudio() {
+            const text = document.getElementById('text').value;
+            const voice = document.getElementById('voice').value;
+            const rate = document.getElementById('rate').value;
+            const pitch = document.getElementById('pitch').value;
+
+            const btn = document.getElementById('generateBtn');
+            const status = document.getElementById('status');
+            const audioContainer = document.getElementById('audioContainer');                             
+            if (!text.trim()) { alert("Please enter text!"); return; }
+
+            btn.disabled = true; btn.innerText = "⏳ Generating...";
+            status.innerText = ""; audioContainer.style.display = "none";
+
+            try {
+                const res = await fetch('/api/generate', {
+                    method: 'POST',                                      headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text, voice, rate, pitch })                                                    });
+                const data = await res.json();       
+                if (data.status === "success") {
+                    document.getElementById('audioPlayer').src = data.audio_url;                                              document.getElementById('downloadLink').href = data.audio_url;                                            audioContainer.style.display = "block";
+                    status.innerText = "✅ Success! Your audio is ready.";                                                }
+            } catch (error) {
+                status.style.color = "#ef4444";
+                status.innerText = "❌ Error generating audio.";                                                      } finally {
+                btn.disabled = false; btn.innerText = "🎬 Generate Speech";
+            }
+        }                                                </script>
+</body>
+</html>
+~ $
