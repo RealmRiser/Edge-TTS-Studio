@@ -97,13 +97,12 @@ Open your browser and go to http://127.0.0.1:5000.
 
 ---
 
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 
-· Backend: Python, Flask
-· TTS Engine: edge-tts (Microsoft Edge's neural TTS API)
-· Production Server: Gunicorn (for deployment, if using a VPS)
-· Frontend: HTML5, CSS3, Vanilla JavaScript
+- **Backend:** Python, Flask
+- **TTS Engine:** `edge-tts` (Microsoft Edge's neural TTS API)
+- **Production Server:** Gunicorn (for deployment, if using a VPS)
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript
 
 ---
-
-Built with ❤️ by RealmRiser
+*Built with ❤️ by [RealmRiser](https://github.com/RealmRiser)*  
