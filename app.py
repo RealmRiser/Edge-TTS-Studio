@@ -7,6 +7,7 @@ import os
 import edge_tts.communicate
 
 app = Flask(__name__)
+os.makedirs('static', exist_ok=True)
 
 @app.route('/')
 def index():
