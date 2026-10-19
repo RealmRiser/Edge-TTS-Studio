@@ -1,4 +1,4 @@
-# 🎙️ Edge TTS Studio
+🎙️ Edge TTS Studio
 
 A lightweight, mobile-first web application that converts text into highly realistic, natural-sounding speech. Powered by Microsoft's Edge Text-to-Speech (TTS) neural voices and built with Python and Flask.
 
@@ -35,3 +35,39 @@ You can run this app on your computer or directly on your Android phone using Te
    ```bash
    git clone https://github.com/RealmRiser/Edge-TTS-Studio.git
    cd Edge-TTS-Studio
+```
+
+4. Install the dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+5. Start the app:
+   ```bash
+   python app.py
+   ```
+6. Open Chrome on your phone and go to: http://127.0.0.1:5000
+
+Option B: Running on Windows / Mac / Linux
+
+1. Make sure you have Python installed.
+2. Clone this repository and navigate into the folder.
+3. Install dependencies: pip install -r requirements.txt
+4. Run the app: python app.py
+5. Open your browser and go to http://127.0.0.1:5000.
+
+---
+
+🛠️ Tech Stack
+
+· Backend: Python, Flask
+· TTS Engine: edge-tts (Microsoft Edge's neural TTS API)
+· Production Server: Gunicorn (for deployment, if using a VPS)
+· Frontend: HTML5, CSS3, Vanilla JavaScript
+
+---
+
+Built with ❤️ by RealmRiser
+
+```
+
+Once you tap that single copy button, just go to GitHub, paste it into your README file, and tap **Commit changes**. It will format perfectly on your GitHub page!
