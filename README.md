@@ -50,4 +50,5 @@ If you are a developer and want to run this project locally or self-host it, her
 1. Clone the repository:
    ```bash
    git clone https://github.com/RealmRiser/Edge-TTS-Studio.git
+cd Edge-TTS-Studio
    cd Edge-TTS-Studio
