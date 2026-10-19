@@ -1,4 +1,4 @@
-🎙️ Edge TTS Studio
+ 🎙️ Edge TTS Studio
 
 A lightweight, mobile-first web application that converts text into highly realistic, natural-sounding speech. Powered by Microsoft's Edge Text-to-Speech (TTS) neural voices and built with Python and Flask.
 
@@ -29,31 +29,71 @@ Because the interface is fully responsive, it works perfectly on desktop compute
 You can run this app on your computer or directly on your Android phone using Termux. 
 
 ### Option A: Running on Android (Using Termux)
-1. Install **Termux** (from F-Droid).
-2. Update packages and install Python: `pkg update && pkg upgrade -y` then `pkg install python -y`
-3. Clone this repository: 
-   ```bash
-   git clone https://github.com/RealmRiser/Edge-TTS-Studio.git
-   cd Edge-TTS-Studio
+
+**1. Install Termux**
+Download and install the Termux app from F-Droid.
+
+**2. Update Packages and Install Python**
+Run these commands one by one in Termux:
+```bash
+pkg update && pkg upgrade -y
+pkg install python -y
 ```
 
-4. Install the dependencies:
-  ```bash
-   pip install -r requirements.txt
-   ```
-5. Start the app:
-   ```bash
-   python app.py
-   ```
-6. Open Chrome on your phone and go to: http://127.0.0.1:5000
+3. Clone the Repository
+Download the code to your phone:
+
+```bash
+git clone https://github.com/RealmRiser/Edge-TTS-Studio.git
+cd Edge-TTS-Studio
+```
+
+4. Install Dependencies
+Install the required Python packages:
+
+```bash
+pip install -r requirements.txt
+```
+
+5. Start the App
+Launch the local server:
+
+```bash
+python app.py
+```
+
+6. Open the App
+Open Chrome on your phone and go to: http://127.0.0.1:5000
+
+---
 
 Option B: Running on Windows / Mac / Linux
 
-1. Make sure you have Python installed.
-2. Clone this repository and navigate into the folder.
-3. Install dependencies: pip install -r requirements.txt
-4. Run the app: python app.py
-5. Open your browser and go to http://127.0.0.1:5000.
+1. Install Python
+Make sure you have Python installed on your computer.
+
+2. Clone the Repository
+Open your terminal and run:
+
+```bash
+git clone https://github.com/RealmRiser/Edge-TTS-Studio.git
+cd Edge-TTS-Studio
+```
+
+3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Start the App
+
+```bash
+python app.py
+```
+
+5. Open the App
+Open your browser and go to http://127.0.0.1:5000.
 
 ---
 
@@ -69,4 +109,3 @@ Option B: Running on Windows / Mac / Linux
 Built with ❤️ by RealmRiser
 
 ```
-
