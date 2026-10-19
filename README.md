@@ -38,7 +38,7 @@ You can run this app on your computer or directly on your Android phone using Te
 ```
 
 4. Install the dependencies:
-   ```bash
+  ```bash
    pip install -r requirements.txt
    ```
 5. Start the app:
@@ -70,4 +70,3 @@ Built with ❤️ by RealmRiser
 
 ```
 
-Once you tap that single copy button, just go to GitHub, paste it into your README file, and tap **Commit changes**. It will format perfectly on your GitHub page!
