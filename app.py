@@ -6,9 +6,6 @@ import os
 
 import edge_tts.communicate
 
-# This forces the library to use the new Microsoft endpoint
-edge_tts.communicate.WSS_URL = "wss://api.msedgeservices.com/tts/cognitiveservices/websocket/v1"
-
 app = Flask(__name__)
 
 @app.route('/')
