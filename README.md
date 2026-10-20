@@ -63,7 +63,7 @@ python app.py
 ```
 
 6. Open the App
-Open Chrome on your phone and go to: http://127.0.0.1:5000
+Open Chrome/Brave or any browser on your phone and go to: http://127.0.0.1:5000
 
 ---
 
